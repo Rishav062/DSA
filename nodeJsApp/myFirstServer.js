@@ -1,26 +1,35 @@
-const data = require('./data')
-const httpv = require('http');
-httpv.createServer((req,res)=>{
-    res.writeHead(200,{"content-type":"application/json"});
-    res.write(JSON.stringify(data));
-    res.end();
-}).listen(8080);
-
-// console.log("hello,world");
-// const fs= require('fs');
-// const input = process.argv;
-// fs.unlinkSync("text.txt");
-
-
-const fs = require('fs')
+// first create the file in fs(file system):
+const { isUtf8 } = require('buffer');
+const fs = require('fs');
 const path = require('path');
-const filePath = path.join(__dirname,'/files')
-// for(var i=0;i<5;i++){
-//     fs.writeFileSync(filePath+`/demo${i}`,'yes file is created')
-// }
+const filePath = path.join(__dirname,'/crud');
+const fileCreated = `${filePath}/index.txt`;
+console.log(filePath);
+fs.writeFileSync(fileCreated,"yes your file is created");
 
-// fs.readdir(filePath,(err,roy)=>{
-//     roy.forEach((items) => {
-//         console.log(items);
-//     });
-// });
+//Now read it with the help of readFile in fs:
+
+fs.readFile(fileCreated,"Utf8",(err,item)=>{
+    console.log(item);
+})
+
+// Now update that file which we created.
+
+fs.appendFile(fileCreated,'and file name is index.txt',(err)=>{
+    if(!err){
+        console.log("Your file is updated!!");
+    }
+})
+
+// Rename the file in fs :
+
+const newFile = `${filePath}/apple.txt`;
+fs.rename(fileCreated,newFile,(err)=>{
+    if(!err){
+        console.log("Your file is successfully renamed");
+    }
+})
+
+// Deletion in file system:
+
+// fs.unlinkSync(newFile)
