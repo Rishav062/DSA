@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Ejs</title>
+</head>
+<body>
+    <%- include('common/header')  %>
+    <h1>Your ejs started</h1>
+    <ul>
+        <% data.identifiers.forEach((item) => { %>
+           <li> <%= item  %></li>
+     <%   }) %>
+    </ul>
+</body>
+</html>
